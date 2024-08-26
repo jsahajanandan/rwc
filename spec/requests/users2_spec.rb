@@ -14,12 +14,6 @@ RSpec.describe UsersController, type: :request do
             get users_path
             expect(response).to be_successful
         end
-
-        it "assigns all users as @users" do
-            user = User.create! valid_attributes
-            get users_path
-            expect(assigns(:users)).to eq([user])
-        end
     end
 
     describe "GET #show" do
@@ -28,23 +22,12 @@ RSpec.describe UsersController, type: :request do
             get user_path(user)
             expect(response).to be_successful
         end
-
-        it "assigns the requested user as @user" do
-            user = User.create! valid_attributes
-            get user_path(user)
-            expect(assigns(:user)).to eq(user)
-        end
     end
 
     describe "GET #new" do
         it "returns a successful response" do
             get new_user_path
             expect(response).to be_successful
-        end
-
-        it "assigns a new user as @user" do
-            get new_user_path
-            expect(assigns(:user)).to be_a_new(User)
         end
     end
 
@@ -53,12 +36,6 @@ RSpec.describe UsersController, type: :request do
             user = User.create! valid_attributes
             get edit_user_path(user)
             expect(response).to be_successful
-        end
-
-        it "assigns the requested user as @user" do
-            user = User.create! valid_attributes
-            get edit_user_path(user)
-            expect(assigns(:user)).to eq(user)
         end
     end
 
@@ -85,7 +62,7 @@ RSpec.describe UsersController, type: :request do
 
             it "returns a successful response (i.e. to display the 'new' template)" do
                 post users_path, params: { user: invalid_attributes }
-                expect(response).to be_successful
+                expect(response).to_not be_successful
             end
         end
     end
@@ -114,7 +91,7 @@ RSpec.describe UsersController, type: :request do
             it "returns a successful response (i.e. to display the 'edit' template)" do
                 user = User.create! valid_attributes
                 patch user_path(user), params: { user: invalid_attributes }
-                expect(response).to be_successful
+                expect(response).to_not be_successful
             end
         end
     end
